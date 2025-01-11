@@ -101,6 +101,11 @@ def calculate():
     step4 = f"{nCk} \\times {p ** k:.5f} \\times {(1 - p) ** (n - k):.5f}"
     final_result = f"{px_k:.4f}"
 
+    # Menghitung P(X=k) untuk semua nilai k dari 0 sampai k
+    all_px = []
+    for i in range(k + 1):
+        all_px.append(f"P(X = {i}) = {binomial_probability(n, p, i):.4f}")
+
     steps = [
         {"formula": initial_formula},
         {"formula": step1},
@@ -110,7 +115,8 @@ def calculate():
         {"formula": f"P(X = {k}) = {final_result}"},
     ]
 
-    return jsonify(result=f"{total_prob:.4f}", px_k=f"{final_result}", steps=steps)
+    return jsonify(result=f"{total_prob:.4f}", px_k=f"{final_result}", steps=steps, all_px=all_px)
+
 
 # Route untuk menampilkan plot
 @app.route('/plot', methods=['POST'])
