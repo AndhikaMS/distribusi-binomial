@@ -1,0 +1,118 @@
+/* Mengatur font dan margin */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff; /* Warna latar belakang yang lembut */
+    color: #333; /* Warna teks utama */
+}
+
+/* Judul utama */
+h1 {
+    color: #2e3b4e; /* Warna gelap untuk judul */
+    text-align: center;
+    margin-top: 30px;
+    font-size: 28px;
+}
+
+/* Pengaturan form */
+form {
+    background-color: #ffffff; /* Warna latar belakang putih untuk form */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 30px auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #4a90e2; /* Warna biru untuk label */
+}
+
+input[type="number"],
+button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Warna untuk input dan tombol */
+input[type="number"] {
+    background-color: #f9f9f9;
+}
+
+button {
+    background-color: #4CAF50; /* Warna tombol hijau */
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+button:hover {
+    background-color: #45a049; /* Warna tombol saat hover */
+}
+
+/* Gaya untuk hasil */
+#result, #steps {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Menyembunyikan plot hingga tersedia */
+img {
+    display: block;
+    margin-top: 20px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Gaya untuk bagian langkah-langkah perhitungan */
+#steps ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#steps li {
+    font-size: 16px;
+    margin-bottom: 10px;
+    background-color: #f0f8ff;
+    border-left: 5px solid #4CAF50; /* Border kiri berwarna hijau */
+    padding: 8px 10px;
+    border-radius: 5px;
+}
+
+/* Menambahkan sedikit efek transisi pada elemen saat hover */
+input[type="number"]:hover,
+button:hover {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(72, 164, 83, 0.5);
+}
+
+/* Mengatur ukuran font untuk bagian hasil */
+h3 {
+    color: #2e3b4e;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Mengatur elemen gambar untuk responsif */
+img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
