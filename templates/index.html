@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probabilitas Rubik</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Probabilitas Menyelesaikan Rubik di Bawah 15 Detik dalam 1 Sesi</h1>
+
+          <!-- Penjelasan Distribusi Binomial -->
+          <section class="explanation">
+            <h2>Tentang Distribusi Probabilitas Binomial</h2>
+            <p>Distribusi probabilitas binomial adalah distribusi diskrit yang menggambarkan probabilitas suatu peristiwa yang terjadi dalam percobaan yang dilakukan beberapa kali, dengan dua kemungkinan hasil pada setiap percobaan (berhasil atau gagal). Distribusi binomial digunakan dalam banyak aplikasi statistik dan probabilitas, seperti dalam menghitung peluang keberhasilan pada percobaan berulang.</p>
+            <p><strong>Rumus PMF:</strong></p>
+            <p>
+                \[
+                P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
+                \]
+            </p>
+            <p><strong>Rumus CDF:</strong></p>
+            <p>
+                \[
+                P(X \leq k) = \sum_{i=0}^{k} P(X = i)
+                \]
+            </p>
+
+            <h2>Studi Kasus: Probabilitas Menyelesaikan Rubik di bawah 15 Detik dalam 1 Sesi</h2>
+            <p>Misalnya seorang pemain Rubik ingin mengetahui probabilitas dia dapat menyelesaikan Rubik dalam waktu di bawah 15 detik dalam sekali main.</p>
+            <p>Probabilitas Sukses yakni kesuksesan sebelumnya yang kamu ketahui misalnya ada 40% berhasil dalam kemarin seharian main berarti input 0.4. </p>
+            <p>Jumlah Percobaan (n) berarti berapa kali kamu akan bermain misalnya 10. </p>
+            <p>Jumlah Kebehasilan yang Diinginkan (k) berarti berapa kali kamu ingin berhasil dalam n percobaan itu misalnya 5. </p>
+
+        </section>
+
+        <form method="POST">
+            <label for="probabilitas">Probabilitas Sukses (0-1):</label>
+            <input type="number" step="0.01" name="probabilitas" id="probabilitas" required>
+
+            <label for="percobaan">Jumlah Percobaan:</label>
+            <input type="number" name="percobaan" id="percobaan" required>
+
+            <div class="form-group">
+                <label for="keberhasilan">Jumlah Keberhasilan yang Diinginkan (k):</label>
+                <input type="number" name="keberhasilan" id="keberhasilan" required>
+            </div>
+            
+            <button type="submit">Hitung</button>
+        </form>
+
+        {% if probabilities %}
+<h2>Hasil Perhitungan</h2>
+<p>Probabilitas Sukses (p): {{ p }}</p>
+<p>Jumlah Percobaan (n): {{ n }}</p>
+<p>Jumlah Keberhasilan yang Diinginkan (k): {{ k }}</p>
+
+<h3>Langkah Perhitungan PMF</h3>
+<ul>
+    <li>\[ {{ pmf_steps.kombinasi }} \]</li>
+    <li>\[ {{ pmf_steps.prob_sukses }} \]</li>
+    <li>\[ {{ pmf_steps.prob_gagal }} \]</li>
+    <li>
+        \[
+        {{ pmf_steps.hasil_pmf }}
+        \]
+    </li>
+</ul>
+
+<h3>Probabilitas Binomial untuk k = {{ k }}:</h3>
+<p>PMF (P(X = k)): {{ pmf_value | round(4) }}</p>
+<p>CDF (P(X ≤ k)): {{ cdf_value | round(4) }}</p>
+
+<h4>Penjelasan CDF</h4>
+<p>CDF (P(X ≤ k)) adalah hasil penjumlahan dari semua nilai probabilitas P(X = i) dengan i mulai dari 0 hingga k. Ini bisa dijelaskan sebagai:</p>
+<ul>
+    {% for i in range(k + 1) %}
+    <li>P(X = {{ i }}) = {{ probabilities[i] | round(4) }}</li>
+    {% endfor %}
+</ul>
+<p>Sehingga, CDF (P(X ≤ k)) = {{ cdf_value | round(4) }} adalah hasil dari penjumlahan seluruh probabilitas tersebut.</p>
+
+
+<h3>Tabel Hasil Perhitungan PMF untuk Semua Nilai k:</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Percobaan (n)</th>
+            <th>Probabilitas P(X = k)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prob in probabilities %}
+        <tr>
+            <td>{{ loop.index0 }}</td> <!-- Menggunakan loop.index0 untuk indeks dimulai dari 0 -->
+            <td>{{ prob | round(4) }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<h3>Grafik Distribusi Probabilitas</h3>
+<img src="data:image/png;base64,{{ img_str }}" alt="Grafik Probabilitas">
+{% endif %}
+
+
+
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
