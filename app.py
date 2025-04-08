@@ -75,6 +75,12 @@ def index():
             cdf_value=cdf_value
         )
 
+        # Tangkap parameter dari URL seperti ?input=...
+    url_input = request.args.get("input")
+    if url_input:
+        return f"Input dari URL: {url_input}"
+
+
     return render_template("index.html", probabilities=None, img_str=None)
 
 
